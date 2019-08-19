@@ -1,0 +1,64 @@
+<div class="container-fluid">
+
+  <!-- <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="spaceColumn"> </th>
+        <th> 6 AM - 7 AM </th>
+        <th> 7 AM - 8 AM </th>
+        <th> 8 AM - 9 AM </th>
+        <th> 9 AM - 10 AM </th>
+        <th> 10 AM - 11 AM </th>
+        <th> 11 AM - 12 PM </th>
+        <th> 12 PM - 1 PM </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of totalResponse; let i = index;">
+        <td>
+          {{ item.courtName}}
+        </td>
+            <td *ngFor="let timeDetails of timeSlotsDetails">
+          <div *ngIf="!isSlotAvailable(timeDetails, item.courtId)">
+            <i class="far fa-check-circle alert alert-success" (click)="onOpen(timeDetails, item.courtId)"></i>
+          </div>
+          <div *ngIf="isSlotAvailable(timeDetails, item.courtId)">
+              <i class="fas fa-times-circle alert alert-danger" (click)="onOpen(timeDetails, item.courtId)" ></i>
+          </div> 
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+
+  <table class="table table-striped" *ngIf="isLoaded">
+    <thead>
+      <tr>
+        <th class="spaceColumn"> </th>
+        <th> COURT 1 </th>
+        <th> COURT 2 </th>
+        <th> COURT 3 </th>
+        <th> COURT 4 </th>
+        <th> COURT 5 </th>
+        <th> COURT 6 </th>
+      </tr>
+    </thead>
+    <tbody>
+       <tr *ngFor="let timeSlot of timeSlotsDetails">
+         <td>   {{ timeSlot.description }} </td>
+         <td *ngFor="let courtItem of courtListSlots">  
+          
+            <div *ngIf="!isSlotAvailable(timeSlot.description, courtItem.code)">
+                <i class="far fa-check-circle alert alert-success" (click)="onOpen(timeSlot.description, courtItem.code)"></i>
+              </div>
+              <div *ngIf="isSlotAvailable(timeSlot.description, courtItem.code)">
+                  <i class="fas fa-times-circle alert alert-danger" (click)="onOpen(timeSlot.description, courtItem.code)" ></i>
+              </div>
+        
+        </td>
+       </tr>
+    </tbody>
+  </table>
+
+  
+
+</div>

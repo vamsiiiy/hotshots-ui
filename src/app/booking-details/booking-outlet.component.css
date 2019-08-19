@@ -1,0 +1,16 @@
+.spaceColumn {
+    display: inline-block; 
+    margin-left: 50px;
+}
+    
+/* table{
+    width:100%
+}
+tr{
+    display:table;
+    width:100%;
+}
+td{
+    display:table-row;
+    background:#efefef;
+} */
