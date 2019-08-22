@@ -1,6 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import * as _ from "lodash";
+import { BookingService } from '../booking.service';
+import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
+import { utilityDropDown } from '../model/booking-detail';
 
 @Component({
   selector: 'app-booking-infor',
@@ -11,7 +15,14 @@ export class BookingInforComponent implements OnInit {
 
 
   isEditable = false;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  
+
+  utilityItem : Array<string> = ["Shoes", "Shuttels", "Racquets", "CourtPrice", "Drinks"]
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  private dialogRef: MatDialogRef<BookingInforComponent>,
+  private toastr: ToastrService) { }
+  
 
   ngOnInit() {
   }
@@ -29,18 +40,36 @@ export class BookingInforComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.data.bookingDetails);
+    console.log(this.data);
+    // let formatedDate = moment(this.startDate, 'DD-MMM-YYYY').format('DD-MM-YYYY');
+    // this.bookingService.updateTimeSlotDetails(formatedDate, this.data).subscribe(response => {
+    //   if(response) {
+    //     this.bookingService.refresh.next(response);
+    //     this.toastr.success("Slot Updated")
+    //     this.dialogRef.close();
+    //   }
+    // })
+    if(this.isEditable && this.data){
+      this.dialogRef.close(this.data);
+    } else {
+      this.toastr.error("please click Edit details before Saving");
+    }
   }
 
   onNewUtility() {
-    if(this.data != null && this.data.bookingDetails != null && this.data.bookingDetails.utilities != null){
-      const newUtil = {
-        name: '',
-        price: 0,
-        quantity: 0
-      };
-      this.data.bookingDetails.utilities.push(newUtil);
-    }
+
+    const newUtil = {
+      utilityName: '', 
+      utilityQuantity: 0, 
+      utilityPrice: 0
+    };
+
+    if(this.data.timeSlotDetails != null && this.data.timeSlotDetails.length > 0 &&
+      this.data.timeSlotDetails[0].utilityInfoDetails == null){
+        this.data.timeSlotDetails = [];
+      }
+
+      this.data.timeSlotDetails[0].utilityInfoDetails.push(newUtil);
   }
 
 }

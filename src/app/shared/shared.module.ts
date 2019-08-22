@@ -5,6 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { KeyeventListDirective } from './keyevent-list.directive';
+import {ToastrModule} from 'ngx-toastr';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { ToastrGlobalOptions } from './services/toastr.config';
+import { NgSelectModule } from '@ng-select/ng-select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule  } from '@angular/material';
 
 
 @NgModule({
@@ -13,8 +19,37 @@ import { KeyeventListDirective } from './keyevent-list.directive';
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxSpinnerModule,
+    ToastrModule.forRoot(ToastrGlobalOptions.GLOBAL_OPTIONS),
+    NgSelectModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule ,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule 
   ],
-  exports: [KeyeventListDirective]
+  exports: [
+    KeyeventListDirective,
+    NgSelectModule,
+    NgxSpinnerModule,
+    ToastrModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule 
+  ]
 })
-export class SharedModule { }
+export class SharedModule {
+  static forRoot() {
+    return {
+      ngModule: SharedModule,
+      providers:[MatDatepickerModule]
+    };
+  }
+ }

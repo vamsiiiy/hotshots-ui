@@ -8,27 +8,17 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class RestAPIService {
 
-  // apiURL = 'https://api.mockaroo.com/api/56dcfd40?count=1&key=b25b1840';
-  // apiURL = 'http://localhost:3000/';
-  // apiURL = 'http://www.mocky.io/v2/5cc74587320000b139b95193';
-
-
-  //apiURL = 'http://www.mocky.io/v2/5ccb233f610000d60116233c';
-  // apiURL = 'http://www.mocky.io/v2/5ccb36186100005900162391';
-
-  // apiURL = 'http://www.mocky.io/v2/5ccb42b0610000910f1623b5';
-  
-  
-  // apiURL = 'http://www.mocky.io/v2/5ccd90f92e00005c15182a9e';
-
-
-  apiURL = 'http://www.mocky.io/v2/5cd9a9b63000006621c01784';
+  apiURL = 'http://localhost:8080/hot-shots/api/getBookingDetails?bookingDate=';
   constructor(private http: HttpClient) { 
 
   }
 
-  get(): Observable<any>{
-    return this.http.get(this.apiURL);
+  get(date: string): Observable<any>{
+    return this.http.get(this.apiURL + date);
+  }
+
+  post(url: string, body: any): Observable<any> {
+    return this.http.post(url, body);
   }
 
   httpOptions = {

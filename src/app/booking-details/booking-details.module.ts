@@ -4,16 +4,17 @@ import { BookingInforComponent } from './booking-infor/booking-infor.component';
 import { BookingOutletComponent } from './booking-outlet.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { BookingPopupConfirmationComponent } from './booking-popup-confirmation/booking-popup-confirmation.component';
 
 
 
 @NgModule({
-  declarations: [BookingInforComponent, BookingOutletComponent],
+  declarations: [BookingInforComponent, BookingOutletComponent, BookingPopupConfirmationComponent],
   imports: [
     CommonModule,
     FormsModule,
     SharedModule
   ],
-  entryComponents: [BookingInforComponent]
+  entryComponents: [BookingInforComponent, BookingPopupConfirmationComponent]
 })
 export class BookingDetailsModule { }

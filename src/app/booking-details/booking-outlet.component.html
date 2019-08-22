@@ -33,7 +33,14 @@
   <table class="table table-striped" *ngIf="isLoaded">
     <thead>
       <tr>
-        <th class="spaceColumn"> </th>
+        <th class="spaceColumn ml-0"> 
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker"  [(ngModel)]="startDate" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button type="button" class="ml-3 btn btn-info btn-sm" (click)="fetchBookingDetails()" >Go</button>
+        </th>
         <th> COURT 1 </th>
         <th> COURT 2 </th>
         <th> COURT 3 </th>
@@ -47,11 +54,11 @@
          <td>   {{ timeSlot.description }} </td>
          <td *ngFor="let courtItem of courtListSlots">  
           
-            <div *ngIf="!isSlotAvailable(timeSlot.description, courtItem.code)">
-                <i class="far fa-check-circle alert alert-success" (click)="onOpen(timeSlot.description, courtItem.code)"></i>
+            <div *ngIf="!isSlotAvailable(timeSlot.code, courtItem.description)">
+                <i class="far fa-check-circle alert alert-success" (click)="onOpen(timeSlot.code, courtItem.description)"></i>
               </div>
-              <div *ngIf="isSlotAvailable(timeSlot.description, courtItem.code)">
-                  <i class="fas fa-times-circle alert alert-danger" (click)="onOpen(timeSlot.description, courtItem.code)" ></i>
+              <div *ngIf="isSlotAvailable(timeSlot.code, courtItem.description)">
+                  <i class="fas fa-times-circle alert alert-danger" (click)="onOpen(timeSlot.code, courtItem.description)" ></i>
               </div>
         
         </td>
